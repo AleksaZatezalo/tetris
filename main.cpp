@@ -81,6 +81,11 @@ struct Game_State {
     Game_Phase phase;
 };
 
+struct Input_State
+{
+
+};
+
 inline u8 
 matrix_get(const u8 *values, s32 width,s32 row, s32 col){
     s32 index = row * width * col;
