@@ -25,23 +25,32 @@ struct Game_State {
     u8 board[WIDTH * HEIGHT];
 };
 
-void update_game_play(Game_State *game)
-{
-
+inline u8 
+matrix_get(const u8 *values, s32 width,s32 row, s32 col){
+    s32 index = row * width * col;
+    return values[index];
 }
 
-void update_game(Game_State *game)
-{
-    switch (game->phase)
-    {
-    case GAME_PHASE_PLAY:
-        return update_game_play(game);
-        break;
+inline void
+
+
+// void update_game_play(Game_State *game)
+// {
+
+// }
+
+// void update_game(Game_State *game)
+// {
+//     switch (game->phase)
+//     {
+//     case GAME_PHASE_PLAY:
+//         return update_game_play(game);
+//         break;
     
-    default:
-        break;
-    }
-}
+//     default:
+//         break;
+//     }
+// }
 
 int main()
 {
