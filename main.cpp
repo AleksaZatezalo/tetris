@@ -76,6 +76,10 @@ struct Piece_State
 
 struct Game_State {
     u8 board[WIDTH * HEIGHT];
+    Piece_State piece;
+
+    Game_Phase phase;
+
 };
 
 inline u8 
