@@ -32,7 +32,10 @@ matrix_get(const u8 *values, s32 width,s32 row, s32 col){
 }
 
 inline void
-
+matric_set(u8 *values, s32 width,s32 row, s32 col, u8 value){
+    s32 index = row * width + col;
+    values[index] = value;
+}
 
 // void update_game_play(Game_State *game)
 // {
