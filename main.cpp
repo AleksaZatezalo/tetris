@@ -80,6 +80,9 @@ struct Game_State {
 
 struct Input_State
 {
+    s8 dleft;
+    s8 dright;
+    s8 dup;
 };
 
 inline u8 
@@ -95,7 +98,7 @@ matric_set(u8 *values, s32 width,s32 row, s32 col, u8 value){
 }
 
 inline u8
-tetrino_get(Tetrino *tetrino, s32 row, s32 col, s32 rotation){
+tetrino_get( const Tetrino *tetrino, s32 row, s32 col, s32 rotation){
     s32 side = tetrino->side;
     switch (rotation)
     {
@@ -174,7 +177,6 @@ void update_game(Game_State *game)
     switch (game->phase)
     {
     case GAME_PHASE_PLAY:
-        return update_game_play(game);
         break;
     
     default:
