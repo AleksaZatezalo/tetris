@@ -34,7 +34,7 @@ struct Tetrino
 
 inline Tetrino tetrino(const u8 *data, s32 side){
     return { data, side };
-};
+}
 
 const u8 TETRINO_1[] = {
     0, 0, 0, 0,
@@ -43,9 +43,28 @@ const u8 TETRINO_1[] = {
     0, 0, 0, 0
 };
 
-const Tetrino TETRINO[] = {
-    tetrino(TETRINO_1, 4)
+enum Game_Phase
+{
+    GAME_PHASE_PLAY
 };
+
+const u8 TETRINO_2[] = {
+    2, 2, 
+    2, 2
+};
+
+const u8 TETRINO_3[] = {
+    0, 0, 0,
+    3, 3, 3,
+    0, 3, 0
+};
+
+const Tetrino TETRINO[] = {
+    tetrino(TETRINO_1, 4),
+    tetrino(TETRINO_2, 2)
+
+};
+
 
 struct Piece_State
 {
