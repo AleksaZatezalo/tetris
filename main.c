@@ -1,3 +1,6 @@
+// Tetris in C
+// By Aleksa Zatezalo
+// Version 1
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
