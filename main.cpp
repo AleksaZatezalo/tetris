@@ -61,8 +61,8 @@ const u8 TETRINO_3[] = {
 
 const Tetrino TETRINO[] = {
     tetrino(TETRINO_1, 4),
-    tetrino(TETRINO_2, 2)
-
+    tetrino(TETRINO_2, 2),
+    tetrino(TETRINO_3, 3)
 };
 
 
@@ -79,7 +79,6 @@ struct Game_State {
     Piece_State piece;
 
     Game_Phase phase;
-
 };
 
 inline u8 
@@ -92,6 +91,23 @@ inline void
 matric_set(u8 *values, s32 width,s32 row, s32 col, u8 value){
     s32 index = row * width + col;
     values[index] = value;
+}
+
+inline u8
+tetrino_get(Tetrino *tetrino, s32 row, s32 col, s32 rotation){
+    s32 side = tetrino->side;
+    switch (rotation)
+    {
+        case 0:
+            return tetrino->data[row*side + col];
+        case 1:
+            return tetrino->data[(side-col-1) + row];
+        case 2:
+            return tetrino->data[(side-row-1) * side + (side - col - 1)];
+        case 3:
+            return tetrino->data[col * side + (side - row - 1)];
+    }
+    return 0;
 }
 
 void update_game_play(Game_State *game)
