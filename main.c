@@ -1,12 +1,16 @@
 // Tetris in C
 // By Aleksa Zatezalo
 // Version 1
+
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 #include <assert.h>
+
+
+
 
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -20,6 +24,36 @@ typedef double f64;
 #define WIDTH 10
 #define HEIGHT 22
 #define VISIBLE_HEIGHT 20
+#define GRID_SIZE 30
+
+struct Tetrino
+{
+    const u8 *data;
+    const s32 side;
+};
+
+inline Tetrino tetrino(const u8 *data, s32 side){
+    return { data, side };
+};
+
+const u8 TETRINO_1[] = {
+    0, 0, 0, 0,
+    1, 1, 1, 1,
+    0, 0, 0, 0,
+    0, 0, 0, 0
+};
+
+const Tetrino TETRINO[] = {
+    tetrino(TETRINO_1, 4)
+};
+
+struct Piece_State
+{
+    u8 tetrino_index;
+    s32 offset_row;
+    s32 offset_col;
+    s32 rotation;
+};
 
 struct Game_State {
     u8 board[WIDTH * HEIGHT];
@@ -37,23 +71,23 @@ matric_set(u8 *values, s32 width,s32 row, s32 col, u8 value){
     values[index] = value;
 }
 
-// void update_game_play(Game_State *game)
-// {
+void update_game_play(Game_State *game)
+{
 
-// }
+}
 
-// void update_game(Game_State *game)
-// {
-//     switch (game->phase)
-//     {
-//     case GAME_PHASE_PLAY:
-//         return update_game_play(game);
-//         break;
+void update_game(Game_State *game)
+{
+    switch (game->phase)
+    {
+    case GAME_PHASE_PLAY:
+        return update_game_play(game);
+        break;
     
-//     default:
-//         break;
-//     }
-// }
+    default:
+        break;
+    }
+}
 
 int main()
 {
