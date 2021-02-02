@@ -9,9 +9,6 @@
 #include <string.h>
 #include <assert.h>
 
-
-
-
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
@@ -59,7 +56,7 @@ const u8 TETRINO_3[] = {
     0, 3, 0
 };
 
-const Tetrino TETRINO[] = {
+const Tetrino TETRINOS[] = {
     tetrino(TETRINO_1, 4),
     tetrino(TETRINO_2, 2),
     tetrino(TETRINO_3, 3)
@@ -83,7 +80,6 @@ struct Game_State {
 
 struct Input_State
 {
-
 };
 
 inline u8 
@@ -115,9 +111,62 @@ tetrino_get(Tetrino *tetrino, s32 row, s32 col, s32 rotation){
     return 0;
 }
 
-void update_game_play(Game_State *game)
-{
+bool check_piece_valid(const u8 *board, s32 width, s32 height, const Piece_State *piece){
+    const Tetrino *tetrino = TETRINOS + piece->tetrino_index;
+    assert(tetrino);
 
+    for (s32 row = 0; row < height; ++row){
+             for (s32 col = 0;
+             col < tetrino->side;
+             ++col)
+        {
+            u8 value = tetrino_get(tetrino, row, col, piece->rotation);
+            if (value > 0)
+            {
+                s32 board_row = piece->offset_row + row;
+                s32 board_col = piece->offset_col + col;
+                if (board_row < 0)
+                {
+                    return false;
+                }
+                if (board_row >= height)
+                {
+                    return false;
+                }
+                if (board_col < 0)
+                {
+                    return false;
+                }
+                if (board_col >= width)
+                {
+                    return false;
+                }
+                if (matrix_get(board, width, board_row, board_col))
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+void update_game_play(Game_State *game, const Input_State *input)
+{
+    Piece_State piece = game->piece;
+    if (input->dleft > 0){
+       --piece.offset_col;
+    }
+    if (input->dright > 0){
+       ++piece.offset_col;
+    }
+    if (input->dup > 0){
+        piece.rotation = (piece.rotation + 1) % 4;
+    }
+
+    if (check_piece_valid(game->board, WIDTH, HEIGHT, &piece)){
+
+    }
 }
 
 void update_game(Game_State *game)
